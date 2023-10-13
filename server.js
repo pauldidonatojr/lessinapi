@@ -15,6 +15,7 @@ const checkout = require("./routes/checkout");
 const misc = require("./routes/misc");
 const redeem = require("./routes/redeem");
 const products = require("./routes/products");
+const chat = require("./routes/chat");
 const uri = `mongodb+srv://${username}:${password}@cluster0.cvvdng2.mongodb.net/?retryWrites=true&w=majority`;
 
 
@@ -33,6 +34,7 @@ app.use("/products", products);
 app.use("/checkout", checkout);
 app.use("/redeem", redeem);
 app.use("/misc", misc);
+app.use("/chat", chat);
 
 app.listen(port, () => {
   console.log(`Listening to port ${port} ${process.env.FRONTEND_URL}...`);

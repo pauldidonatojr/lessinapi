@@ -22,8 +22,8 @@ exports.signupUser = async (req, res) => {
 
   const { email, password, userName, profile_picture } = req.body;
   console.log(profile_picture)
-  const user = await User.findOne({ email: email });
-  const username = await User.findOne({ userName: userName });
+  const user = await User.findOne({ email: email.toLowerCase() });
+  const username = await User.findOne({ userName: userName.toLowerCase() });
 
   if (user) return res.status(404).send({ message: "User already exists" });
   if (username) return res.status(404).send({ message: "Username taken" });
@@ -34,9 +34,9 @@ exports.signupUser = async (req, res) => {
   const verificationToken = crypto.randomBytes(20).toString("hex");
 
   let newUser = new User({
-    email: email,
+    email: email.toLowerCase(),
     password: hashedPassword,
-    userName: userName,
+    userName: userName.toLowerCase(),
     verificationToken: verificationToken,
     profile_picture: profile_picture
   });
@@ -57,30 +57,33 @@ exports.loginUser = async (req, res) => {
   if (error)
     return res
       .status(400)
-      .send({ message: "Error. Enter data in correct form" });
+      .send({ result: "error",message: "Error. Enter data in correct form" });
 
   const { userName, password } = req.body;
 
   let user = await User.findOne({
-    userName: userName,
+    userName: userName.toLowerCase(),
   });
 
-  if (!user) return res.status(404).send({ message: "Account not found" });
+  if (!user) return res.status(404).send({ result: "error",message: "Account not found" });
   const hashedPassword = await bcrypt.compare(password, user.password);
   if (!hashedPassword)
-    return res.status(404).send({ message: "Invalid email or password" });
+    return res.status(404).send({ result: "error",message: "Invalid email or password" });
 
   const token = jwt.sign({ userId: user._id.toString() }, "userToken");
   if (!token)
     res.status(400).json({
+      result: "error",
       message: "Token is empty",
       data: token,
     });
   else {
     return res.status(200).json({
+      result: "success",
+      id: user._id,
       token: token,
-      userName: user.userName,
-      email: user.email,
+      userName: user.userName.toLowerCase(),
+      email: user.email.toLowerCase(),
       verified: user.isVerified,
       profile_picture: user.profile_picture
     });
