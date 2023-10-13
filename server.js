@@ -36,6 +36,14 @@ app.use("/redeem", redeem);
 app.use("/misc", misc);
 app.use("/chat", chat);
 
+app.use("/", (req, res) => {
+  // Create a JSON response
+  const jsonResponse = { message: 'Hello, this is a JSON response!' };
+  
+  // Send the JSON response to the client
+  res.json(jsonResponse);
+});
+
 app.listen(port, () => {
   console.log(`Listening to port ${port} ${process.env.FRONTEND_URL}...`);
 });

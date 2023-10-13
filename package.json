@@ -2,9 +2,12 @@
   "name": "lessin-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./bin/www",
+  "engines": {
+    "node": ">=14.20.1"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon ./bin/www"
   },
   "keywords": [],
   "author": "",
