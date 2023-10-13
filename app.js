@@ -43,6 +43,8 @@ app.use("/", (req, res) => {
   // Send the JSON response to the client
   res.json(jsonResponse);
 });
-
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
 
 module.exports = app;
