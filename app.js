@@ -37,6 +37,7 @@ app.use("/misc", misc);
 app.use("/chat", chat);
 
 app.use("/", (req, res) => {
+  console.log('request received');
   // Create a JSON response
   const jsonResponse = { message: 'Hello, this is a JSON response!' };
   

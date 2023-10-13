@@ -60,7 +60,7 @@ exports.loginUser = async (req, res) => {
       .send({ result: "error",message: "Error. Enter data in correct form" });
 
   const { userName, password } = req.body;
-
+  console.log('request received');
   let user = await User.findOne({
     userName: userName.toLowerCase(),
   });
