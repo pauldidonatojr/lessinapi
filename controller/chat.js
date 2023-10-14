@@ -16,8 +16,7 @@ const {
 
 exports.CreateLead = async (req, res) => {
   const { name, email, phone, message } = req.body;
-  console.log(req.body)
-  return res.status(400).send({ message: "Enter data correctly" });
+  
   const { error } = validateChat(req.body);
   if (error) return res.status(400).send({ message: "Enter data correctly" });
 
