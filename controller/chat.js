@@ -76,6 +76,25 @@ exports.CreateLead = async (req, res) => {
 };
 
 
+exports.LeadClose = async (req, res) => {
+  const { leadID ,uid } = req.body;
+
+  // const { error } = validateChat(req.body);
+  // if (error) return res.status(400).send({ message: "Enter data correctly" });
+  try {
+
+  const leadcheck = await Leads.findOne({ _id: leadID });
+  if(leadcheck){
+    leadcheck.status = close;
+    rep = await leadcheck.save();
+  }
+    return res.status(201).json({ result: "success",message: 'Lead Closed' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'An error occurred' });
+  }
+};
+
 exports.SendMessage = async (req, res) => {
     const { leadID ,uid, message } = req.body;
   

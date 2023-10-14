@@ -9,6 +9,7 @@ chat.post("/create-lead", chatController.CreateLead);
 chat.post("/send-msg", chatController.SendMessage);
 chat.post("/fetch-leads", chatController.FetchLeads);
 chat.post("/get-lead-responder", chatController.FetchLeadsResponse);
+chat.post("/close-lead", chatController.LeadClose);
 // chat.get("/success", chatController.success);
 // chat.get("/failure", chatController.failure);
 
