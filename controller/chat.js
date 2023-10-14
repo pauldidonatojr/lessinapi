@@ -95,6 +95,17 @@ exports.SendMessage = async (req, res) => {
             if(!leadcheck.responder_id==uid){
               return res.status(404).json({ result: "error",message: 'Lead assigned to someone else' });  
             }
+             // Create a new chat history object
+             const newChat = {
+              message: message,
+              status: '0',
+              uid: uid,
+          };
+          
+          // Add the new chat history object to the existing array
+          leadcheck.responder_id = uid;
+          leadcheck.chathistory.push(newChat);
+          rep = await leadcheck.save();
             
         }
         else{
