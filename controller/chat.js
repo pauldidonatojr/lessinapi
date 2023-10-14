@@ -68,7 +68,7 @@ exports.CreateLead = async (req, res) => {
             chathistory: chatDetails
         });
         const savedLead = await newLead.save();
-    return res.status(201).json({ result: "success",message: 'Lead generated successfully',leadId:savedLead._id });
+    return res.status(201).json({ result: "success",message: 'Lead generated successfully',leadId:savedLead._id,uid:savedUser._id });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ result: "error", message: 'An error occurred' });
