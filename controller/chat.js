@@ -103,7 +103,7 @@ exports.SendMessage = async (req, res) => {
             };
             
             // Add the new chat history object to the existing array
-            leadcheck.responder_id = uid;
+            leadcheck.responder_id = '1234';
             leadcheck.chathistory.push(newChat);
             rep = await leadcheck.save();
         }
@@ -115,6 +115,7 @@ exports.SendMessage = async (req, res) => {
             status: '0',
             uid: uid,
         };
+        leadcheck.responder_id = '123';
         leadcheck.chathistory.push(newChat);
         rep = await leadcheck.save();
     }
