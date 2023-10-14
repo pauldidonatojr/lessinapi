@@ -129,7 +129,6 @@ exports.SendMessage = async (req, res) => {
             status: '0',
             uid: uid,
         };
-        leadcheck.responder_id = uid;
         leadcheck.chathistory.push(newChat);
         rep = await leadcheck.save();
     }
@@ -322,10 +321,11 @@ exports.SendMessage = async (req, res) => {
     try {
       // Query for data from the Leads table if leadID matches _id and responder_id is not null
       const response = await Leads.findOne({ _id: leadID, responder_id: { $ne: null } });
-      console.log(response)
+      
       if (response && response.responder_id) {
         // If a matching lead is found, retrieve user data using the user_id
         const userData = await User.findOne({ _id: response.responder_id });
+        console.log(response.responder_id)
         if (userData) {
           // Extract username and profile picture from user data
           const { userName, profile_picture } = userData;
