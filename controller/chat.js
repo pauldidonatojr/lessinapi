@@ -82,7 +82,7 @@ exports.SendMessage = async (req, res) => {
     // const { error } = validateChat(req.body);
     // if (error) return res.status(400).send({ message: "Enter data correctly" });
     try {
-        if(req.body.utype){
+        if(req.body.type){
             utype = 'admin';
         }
         else{
@@ -103,7 +103,7 @@ exports.SendMessage = async (req, res) => {
             };
             
             // Add the new chat history object to the existing array
-            leadcheck.responder_id = '1234';
+            leadcheck.responder_id = uid;
             leadcheck.chathistory.push(newChat);
             rep = await leadcheck.save();
         }
@@ -115,7 +115,7 @@ exports.SendMessage = async (req, res) => {
             status: '0',
             uid: uid,
         };
-        leadcheck.responder_id = '123';
+        leadcheck.responder_id = uid;
         leadcheck.chathistory.push(newChat);
         rep = await leadcheck.save();
     }
