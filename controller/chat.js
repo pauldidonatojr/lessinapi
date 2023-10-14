@@ -92,7 +92,10 @@ exports.SendMessage = async (req, res) => {
     
     if(utype=='admin'){
         if(leadcheck.responder_id!=''){
-            return res.status(404).json({ result: "error",message: 'Lead assigned to someone else' });
+            if(!leadcheck.responder_id==uid){
+              return res.status(404).json({ result: "error",message: 'Lead assigned to someone else' });  
+            }
+            
         }
         else{
             // Create a new chat history object
